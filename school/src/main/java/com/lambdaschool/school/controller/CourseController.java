@@ -29,7 +29,7 @@ public class CourseController
     {
         logger.warn("This is a log");
         logger.trace("This is another log");
-        logger.info(request.getMethod() + " " + request.getRequestURI());
+        logger.info(request.getMethod() + " " + request.getRequestURI() + " ACCESSED");
         ArrayList<Course> myCourses = courseService.findAll();
         return new ResponseEntity<>(myCourses, HttpStatus.OK);
     }

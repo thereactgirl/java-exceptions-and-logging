@@ -33,7 +33,7 @@ public class StudentController
     {
         logger.warn("This is a log");
         logger.trace("This is another log");
-        logger.info(request.getMethod() + " " + request.getRequestURI());
+        logger.info(request.getMethod() + " " + request.getRequestURI() + "ACCESSED");
         List<Student> myStudents = studentService.findAll();
         return new ResponseEntity<>(myStudents, HttpStatus.OK);
     }
