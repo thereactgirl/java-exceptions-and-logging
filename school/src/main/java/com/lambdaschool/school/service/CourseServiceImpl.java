@@ -6,6 +6,7 @@ import com.lambdaschool.school.model.Course;
 import com.lambdaschool.school.repository.CourseRepository;
 import com.lambdaschool.school.view.CountStudentsInCourses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +18,22 @@ public class CourseServiceImpl implements CourseService
 {
     @Autowired
     private CourseRepository courserepos;
+
+
+    @Override
+    public ArrayList<Course> findAllPageable(Pageable pageable)
+    {
+        ArrayList<Course> list = new ArrayList<>();
+        courserepos.findAll(pageable).iterator().forEachRemaining(list::add);
+        return list;
+    }
+
+    @Override
+    public Course findCourseById(long id) throws ResourceNotFoundException
+    {
+        return courserepos.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(Long.toString(id)));
+    }
 
     @Override
     public ArrayList<Course> findAll()
@@ -44,5 +61,15 @@ public class CourseServiceImpl implements CourseService
         {
             throw new ResourceNotFoundException(Long.toString(id));
         }
+    }
+
+    @Override
+    public Course save(Course course)
+    {
+        Course newCourse = new Course();
+
+        newCourse.setCoursename(course.getCoursename());
+
+        return courserepos.save(newCourse);
     }
 }
