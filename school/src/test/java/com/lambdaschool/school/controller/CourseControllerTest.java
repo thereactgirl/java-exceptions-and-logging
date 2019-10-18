@@ -109,23 +109,26 @@ public class CourseControllerTest
 	@Test
 	public void listAllCourses() throws Exception
 	{
-//		//specific endpoint i need
-//		String apiurl = "/courses/courses";
-//
-//		//calls the mocked version of the service
-//		Mockito.when(courseService.findAll()).thenReturn(courseList);
-//
-//		RequestBuilder rb = MockMvcRequestBuilders.get(apiurl).accept(MediaType.APPLICATION_JSON);
-//
-//		// the following actually performs a real controller call
-//		MvcResult r = mockMvc.perform(rb).andReturn(); // this could throw an exception
-//		String tr = r.getResponse().getContentAsString(); //gets the res and returns as a string
-//
-//		//manual conversion of string to json
-//		ObjectMapper mapper = new ObjectMapper();
-//		String er = mapper.writeValueAsString(courseList);
-//
-//		assertEquals("Rest API Returns List", er, tr);
+		//specific endpoint i need
+		String apiurl = "/courses/courses";
+
+		//calls the mocked version of the service
+		Mockito.when(courseService.findAll()).thenReturn(courseList);
+
+		RequestBuilder rb = MockMvcRequestBuilders.get(apiurl).accept(MediaType.APPLICATION_JSON);
+		System.out.println(rb);
+
+		// the following actually performs a real controller call
+		MvcResult r = mockMvc.perform(rb).andReturn(); // this could throw an exception
+		System.out.println("GET endpoint accessed?");
+
+		String tr = r.getResponse().getContentAsString(); //gets the res and returns as a string
+
+		//manual conversion of string to json
+		ObjectMapper mapper = new ObjectMapper();
+		String er = mapper.writeValueAsString(courseList);
+
+		assertEquals("Rest API Returns List", er, tr);
 
 	}
 
